@@ -1,6 +1,6 @@
 Membre du groupe :
 
-Outrebon SÃ©raphin
+Outrebon Séraphin
 Guesba Iyad
 Boukhemal Rayane
 Liu Pascal
