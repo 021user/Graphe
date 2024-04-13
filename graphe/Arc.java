@@ -22,13 +22,13 @@ public class Arc {
     }
 
     // Getter pour la source de l'arc
-    public int getSource() {
-        return source;
+    public String getSource() {
+        return String.valueOf(source);
     }
 
     // Getter pour la destination de l'arc
-    public int getDestination() {
-        return destination;
+    public String getDestination() {
+        return String.valueOf(destination);
     }
 
     // Getter pour le poids de l'arc
@@ -46,7 +46,7 @@ public class Arc {
                 '}';
     }
 
-    public Object getValuation() {
+    public Integer getValuation() {
         return poids;
     }
 }
