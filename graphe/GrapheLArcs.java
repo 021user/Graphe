@@ -1,10 +1,7 @@
 package graphe;
 
-import graphe.Arc;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class GrapheLArcs {
     private List<Arc> arcs;
