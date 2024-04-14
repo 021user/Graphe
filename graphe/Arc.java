@@ -37,16 +37,7 @@ public class Arc {
     }
 
     // Override pour pouvoir comparer les arcs dans les tests unitaires
-    @Override
-    public String toString() {
-        return "Arc{" +
-                "source=" + source +
-                ", destination=" + destination +
-                ", poids=" + poids +
-                '}';
-    }
-
-    public Integer getValuation() {
+r getValuation() {
         return poids;
     }
 }
