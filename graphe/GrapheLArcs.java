@@ -78,7 +78,7 @@ public class GrapheLArcs extends Graphe {
     }
 
     @Override
-    public void oterSommet(String noeud){//Supprime un sommet
+    public void oterSommet(String noeud){//Supprime un sommet donne
         int indice = -1;
         for(int i = 0; i < this.Sommets.size();++i){
             if(this.Sommets.get(i).equals(noeud))
