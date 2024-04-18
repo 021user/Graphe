@@ -1,23 +1,15 @@
 package graphe;
 
 public class Arc {
-    private int source;
-    private int destination;
-    private int poids;
+    private String source;
+    private String destination;
+    private Integer poids;
 
     // Constructeur pour un arc avec une source, une destination et un poids qui sera indiqué lors de
     // l'ajout de l'arc dans le graphe (voir GrapheLArcs.java)
-    public Arc(int source, int destination, int poids) {
+    public Arc(String source, String destination, Integer poids) {
         this.source = source;
         this.destination = destination;
-        this.poids = poids;
-    }
-
-    // Constructeur pour un arc avec une source, une destination et un poids qui sera indiqué lors de
-    // l'ajout de l'arc dans le graphe (voir GrapheLArcs.java)
-    public Arc(String source, String destination, int poids) {
-        this.source = Integer.parseInt(source);
-        this.destination = Integer.parseInt(destination);
         this.poids = poids;
     }
 
@@ -37,7 +29,7 @@ public class Arc {
     }
 
     // Override pour pouvoir comparer les arcs dans les tests unitaires
-r getValuation() {
+    public int getValuation() {
         return poids;
     }
 }
