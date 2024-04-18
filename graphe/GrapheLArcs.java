@@ -30,7 +30,7 @@ public class GrapheLArcs extends Graphe {
     }
 
     @Override
-    public boolean contientArc(String src, String dest){//Regarde si l'Arc existe
+    public boolean contientArc(String src, String dest){//Regarde si l'Arc existe.
         for(int i = 0; i < this.nombreNoeuds; ++i)
         {
             if(this.arcs.get(i).getSource().equals(src) && this.arcs.get(i).getDestination().equals(dest))
