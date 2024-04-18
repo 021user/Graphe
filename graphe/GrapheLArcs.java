@@ -20,7 +20,7 @@ public class GrapheLArcs extends Graphe {
     }
 
     @Override
-    public boolean contientSommet(String sommet){//Regarde si le sommet existe déjà
+    public boolean contientSommet(String sommet){//Regarde si le sommet existe déjà.
         for(int i = 0; i < this.Sommets.size(); ++i)
         {
             if(this.Sommets.get(i).equals(sommet))
