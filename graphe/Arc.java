@@ -23,12 +23,7 @@ public class Arc {
         return String.valueOf(destination);
     }
 
-    // Getter pour le poids de l'arc
-    public int getPoids() {
-        return poids;
-    }
-
-    // Override pour pouvoir comparer les arcs dans les tests unitaires
+    // Return le poids
     public int getValuation() {
         return poids;
     }

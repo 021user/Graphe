@@ -71,7 +71,7 @@ public class GrapheLArcs extends Graphe {
                 indice = i;
         }
         if(indice == -1)
-            throw new IllegalArgumentException("Un arc existe déjà entre les sommets : " + source + " et " + destination);
+            throw new IllegalArgumentException("Aucun arc n'existe entre les sommets :" + source + " et " + destination);
         else
             this.arcs.remove(indice);
 
