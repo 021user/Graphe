@@ -37,9 +37,7 @@ public class SommetsLAdj {
         this.LValu.add(valeur);
     }
 
-    public boolean suprAdj(String Sommet){
-        if(!this.EstAdj(Sommet))
-            return true;//L'arc n'a pas été trouvé
+    public void suprAdj(String Sommet){
         int indice = 0;
         for(int i = 0; i < this.LAdj.size(); ++i){
             if(this.LAdj.get(i).equals(Sommet))
@@ -47,7 +45,6 @@ public class SommetsLAdj {
         }
         this.LAdj.remove(indice);
         this.LValu.remove(indice);
-        return true;//L'arc a bien été trouvé et supprimé
     }
 
     public boolean EstAdj(String Sommet){

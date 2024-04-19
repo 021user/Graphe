@@ -35,7 +35,7 @@ public class GrapheLAdj extends Graphe{
             if(this.LSommets.get(i).getNom().equals(src))
                 return this.LSommets.get(i).getValuation(dest);
         }
-        return -1;
+        throw new IllegalArgumentException("Le Sommet n'existe pas");
     }
 
     @Override
@@ -46,12 +46,16 @@ public class GrapheLAdj extends Graphe{
     }
 
     @Override
-    public void ajouterArc(String source, String destination, Integer valeur){//Ajoute un arc si les conditions sont
+    public void ajouterArc(String source, String destination, Integer valeur){//Ajoute un arc si les conditions sont bonnes
         if (valeur < 0)//Regarde si la valeure est positif
             throw new IllegalArgumentException("Les valuations ne doivent pas etre negatives " + valeur);
+        if(!this.contientSommet(source))//Rajoute le Sommet source si il n'existe pas
+            this.ajouterSommet(source);
+        if(!this.contientSommet(destination))//Rajoute le Sommet destination si il n'existe pas
+            this.ajouterSommet(destination);
         for(int i = 0; i < this.LSommets.size();++i){
             if(this.LSommets.get(i).getNom().equals(source)){
-                if(this.contientArc(source,destination))
+                if(this.LSommets.get(i).EstAdj(destination))
                     throw new IllegalArgumentException("L'arc existe déjà");
                 this.LSommets.get(i).ajouterAdj(destination,valeur);
             }
@@ -60,14 +64,13 @@ public class GrapheLAdj extends Graphe{
 
     @Override
     public void oterArc(String source, String destination){
-        boolean trouve = false;//Condition pour renvoyer ou non l'exception
+        if(!this.contientArc(source,destination))
+            throw new IllegalArgumentException("L'arc cherché n'existe pas");
         for(int i = 0; i < this.LSommets.size();++i){
             if(this.LSommets.get(i).getNom().equals(source)){
-                trouve = this.LSommets.get(i).suprAdj(destination);
+                this.LSommets.get(i).suprAdj(destination);
             }
         }
-        if(trouve)
-            throw new IllegalArgumentException("L'arc cherché n'existe pas");
     }
 
     @Override
