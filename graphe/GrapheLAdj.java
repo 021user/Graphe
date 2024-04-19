@@ -30,7 +30,7 @@ public class GrapheLAdj extends Graphe{
     }
 
     @Override
-    public int getValuation(String src, String dest){//Return la Valuation d'un arc sinon -1
+    public int getValuation(String src, String dest){//Return la Valuation d'un arc sinon -1.
         for(int i = 0; i < this.LSommets.size();++i){
             if(this.LSommets.get(i).getNom().equals(src))
                 return this.LSommets.get(i).getValuation(dest);
