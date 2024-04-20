@@ -7,122 +7,136 @@ import java.util.List;
 import java.util.Map;
 
 public class GrapheMAdj extends Graphe {
-	private int[][] matrice;
-    private Map<String, Integer> indices;
+	private int[][] MVolume;
+    private ArrayList<String> NomSommet ;
+
+    private int NbSommets;
     
     public GrapheMAdj() {
-        matrice = new int[0][0];
-        indices = new HashMap<>();
+        this.MVolume = new int[0][0];
+        this.NomSommet = new ArrayList<>();
+        this.NbSommets = 0;
     }
 
-    public GrapheMAdj(String str) {
-    	this();
-		this.peupler(str);
-	}
+    public int Indice(String sommet){
+        for(int i = 0; i < this.NbSommets;++i){
+            if(this.NomSommet.get(i).equals(sommet))
+                return i;
+        }
+        return -1;
+    }
+
 
 	@Override
     public void ajouterSommet(String noeud) {
-        if (!indices.containsKey(noeud)) {
-            indices.put(noeud, indices.size());
-
-            int newSize = indices.size();
-            int[][] newMatrice = new int[newSize][newSize];
-            for (int i = 0; i < matrice.length; i++) {
-                System.arraycopy(matrice[i], 0, newMatrice[i], 0, matrice.length);
+        if(!this.contientSommet(noeud)){
+            this.NomSommet.add(noeud);
+            this.NbSommets+=1;
+            int[][] newM = new int [this.NbSommets][this.NbSommets];
+            for(int i = 0; i < this.NbSommets-1;++i){
+                for(int j = 0; j < this.NbSommets-1;++i){
+                    newM[i][j] = this.MVolume[i][j];
+                }
+                newM[i][this.NbSommets] = this.MVolume[i][this.NbSommets];
             }
-            matrice = newMatrice;
+            for(int i = 0; i < this.NbSommets;++i){
+                newM[this.NbSommets][i] = this.MVolume[this.NbSommets][i];
+            }
+            this.MVolume = newM;
         }
     }
 
 	public void ajouterArc(String source, String destination, Integer valeur) {
-		if (!indices.containsKey(source)) {
-	        ajouterSommet(source);
-	    }
-	    if (!indices.containsKey(destination)) {
-	        ajouterSommet(destination);
-	    }
-	    int indexSource = indices.get(source);
-	    int indexDestination = indices.get(destination);
-
-	    if (matrice[indexSource][indexDestination] > 0) {
-	        throw new IllegalArgumentException("Un arc existe déjà entre les sommets : " + source + " et " + destination);
-	    }
-	    if (valeur < 0)
-	    	throw new IllegalArgumentException("Les valuations ne doivent pas etre negatives " + valeur);
-
-	    matrice[indexSource][indexDestination] = valeur;
+        if (valeur < 0)//Regarde si la valeure est positif
+            throw new IllegalArgumentException("Les valuations ne doivent pas etre negatives " + valeur);
+        int x = this.Indice(source);
+        int y = this.Indice(destination);
+        if(x == -1)
+            this.ajouterSommet(source);
+        if(y == -1)
+            this.ajouterSommet(destination);
+        if(this.MVolume[x][y] != 0)
+            throw new IllegalArgumentException("L'arc existe déjà");
+        else
+            this.MVolume[x][y] = valeur;
 	}
 
 
     @Override
-    public void oterSommet(String noeud) {
-        if (indices.containsKey(noeud)) {
-            int index = indices.get(noeud);
-            indices.remove(noeud);
-
-            // Reset the corresponding row and column in the adjacency matrix
-            for (int i = 0; i < matrice.length; i++) {
-                matrice[index][i] = 0;
-                matrice[i][index] = 0;
+    public void oterSommet(String noeud) {//A corriger
+        if(this.contientSommet(noeud)){
+            int x = this.Indice(noeud);
+            int[][] newM = new int[this.NbSommets-1][this.NbSommets-1];
+            for(int i = 0; i < this.NbSommets;++i){
+                if(i != x)
+                {
+                    for(int j = 0; j < this.NbSommets;++j){
+                        if(j != x)
+                            newM[i][j] = this.MVolume[i][j];
+                    }
+                }
             }
+            this.NomSommet.remove(x);
+            this.NbSommets-=1;
+            this.MVolume = newM;
         }
     }
 
     @Override
     public void oterArc(String source, String destination) {
-        if (indices.containsKey(source) && indices.containsKey(destination)) {
-            int indexSource = indices.get(source);
-            int indexDestination = indices.get(destination);
-
-            if (matrice[indexSource][indexDestination] == 0) {
-                throw new IllegalArgumentException("Aucun arc n'existe entre les sommets : " + source + " et " + destination);
-            }
-
-            matrice[indexSource][indexDestination] = 0;
-        } else {
-            throw new IllegalArgumentException("Sommet source et/ou sommet de destination introuvable : " + source + ", " + destination);
-        }
+        int x = this.Indice(source);
+        int y = this.Indice(destination);
+        if(x == -1 || y == -1 || this.MVolume[x][y] == 0)
+            throw new IllegalArgumentException("L'arc existe déjà");
+        else
+            this.MVolume[x][y] = 0;
     }
 
     @Override
     public List<String> getSucc(String sommet) {
-        List<String> successors = new ArrayList<>();
-        if (indices.containsKey(sommet)) {
-            int index = indices.get(sommet);
-            for (Map.Entry<String, Integer> entry : indices.entrySet()) {
-                if (matrice[index][entry.getValue()] > 0) {
-                    successors.add(entry.getKey());
-                }
+        ArrayList<String> Succ = new ArrayList<>();
+        int x = this.Indice(sommet);
+        for(int i = 0; i < this.NbSommets;++i){
+            if(this.MVolume[x][i] >= 0)
+            {
+                Succ.add(this.NomSommet.get(i));
             }
         }
-        return successors;
+        return Succ;
     }
 
 
     @Override
     public List<String> getSommets() {
-    	List<String> vertices = new ArrayList<>(indices.keySet());
-        Collections.sort(vertices);
-        return vertices;
+        return this.NomSommet;
     }
 
     @Override
     public int getValuation(String src, String dest) {
-        int indexSource = indices.get(src);
-        int indexDestination = indices.get(dest);
-        return matrice[indexSource][indexDestination];
+        if(!this.contientArc(src,dest))
+            return -1;
+        int x = this.Indice(src);
+        int y = this.Indice(dest);
+        return this.MVolume[x][y];
     }
 
     @Override
     public boolean contientSommet(String sommet) {
-        return indices.containsKey(sommet);
+        for(int i = 0; i < this.NomSommet.size(); ++i)
+        {
+            if(this.NomSommet.get(i).equals(sommet))
+                return true;
+        }
+        return false;
     }
 
     @Override
     public boolean contientArc(String src, String dest) {
-        int indexSource = indices.get(src);
-        int indexDestination = indices.get(dest);
-        return matrice[indexSource][indexDestination] > 0;
+        int x = this.Indice(src);
+        int y = this.Indice(dest);
+        if(x == -1 || y == -1 || this.MVolume[x][y] == 0)
+            return false;
+        return true;
     }
 
 }
