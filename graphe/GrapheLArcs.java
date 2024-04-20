@@ -65,6 +65,7 @@ public class GrapheLArcs extends Graphe {
         if(!this.contientSommet(destination))//Rajoute le Sommet destination si il n'existe pas
             this.ajouterSommet(destination);
         this.arcs.add(new Arc(source,destination,valeur));
+        this.nombreNoeuds+=1;
     }
 
     @Override
@@ -76,9 +77,10 @@ public class GrapheLArcs extends Graphe {
         }
         if(indice == -1)
             throw new IllegalArgumentException("Aucun arc n'existe entre les sommets :" + source + " et " + destination);
-        else
+        else{
             this.arcs.remove(indice);
-
+            this.nombreNoeuds-=1;
+       }
     }
 
     @Override
@@ -89,9 +91,15 @@ public class GrapheLArcs extends Graphe {
                 indice = i;
         }
         if(indice >= 0) {
+            ArrayList<Integer> listeindice = new ArrayList<>();
             for (int i = 0; i < this.nombreNoeuds; ++i) {
                 if (this.arcs.get(i).getSource().equals(noeud) || this.arcs.get(i).getDestination().equals(noeud))
-                    this.oterArc(this.arcs.get(i).getSource(), this.arcs.get(i).getDestination());
+                    listeindice.add(i);
+            }
+            int cpt = 0;
+            for(int i = 0; i < listeindice.size();++i){
+                this.oterArc(this.arcs.get(listeindice.get(i)-cpt).getSource(), this.arcs.get(listeindice.get(i)-cpt).getDestination());
+                cpt+=1;
             }
             this.Sommets.remove(indice);
         }

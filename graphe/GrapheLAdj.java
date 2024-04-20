@@ -35,14 +35,13 @@ public class GrapheLAdj extends Graphe{
             if(this.LSommets.get(i).getNom().equals(src))
                 return this.LSommets.get(i).getValuation(dest);
         }
-        throw new IllegalArgumentException("Le Sommet n'existe pas");
+        return -1;
     }
 
     @Override
     public void ajouterSommet(String noeud){
-        if(this.contientSommet(noeud))
-            throw new IllegalArgumentException("Le Sommet existe déjà");
-        this.LSommets.add(new SommetsLAdj(noeud));
+        if(!this.contientSommet(noeud))
+            this.LSommets.add(new SommetsLAdj(noeud));
     }
 
     @Override
@@ -74,14 +73,21 @@ public class GrapheLAdj extends Graphe{
     }
 
     @Override
-    public void oterSommet(String noeud){//Supprime un sommet
+    public void oterSommet(String noeud) {//Supprime un sommet
         int indice = -1;
-        for(int i = 0; i < this.LSommets.size(); ++i){
-            if(this.LSommets.get(i).getNom().equals(noeud))
+        for (int i = 0; i < this.LSommets.size(); ++i) {
+            if (this.LSommets.get(i).getNom().equals(noeud))
                 indice = i;
         }
-        if(indice >=0)
+        if (indice >= 0) {
+            for (int i = 0; i < this.LSommets.size(); ++i) {
+                for (int j = 0; j < this.LSommets.get(i).getListeAdj().size(); ++j) {
+                    if (this.LSommets.get(i).getListeAdj().get(j).equals(noeud))
+                        this.LSommets.get(i).getListeAdj().remove(j);
+                }
+            }
             this.LSommets.remove(indice);
+        }
     }
 
     @Override

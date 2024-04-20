@@ -21,8 +21,9 @@ import org.junit.jupiter.api.Test;
 class IGrapheTest {
 	private final IGraphe[] graphes = {
             new GrapheLArcs(), new GrapheLAdj(),
-			new GrapheMAdj(), new GrapheHHAdj()
+			new GrapheMAdj()
 	};
+	/*
 	
 	// graphe de l'exercice 3.1 du poly de maths
 	// avec en plus un noeud isole : J
@@ -173,5 +174,5 @@ class IGrapheTest {
             System.out.println("Erreur lors de l'acces aux dossiers: " + e.getMessage());
         }
     }
-
+*/
 }

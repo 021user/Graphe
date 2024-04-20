@@ -12,6 +12,7 @@ public class SommetsLAdj {
     {
         this.NomSommet = NomSommet;
         this.LAdj = new ArrayList<>();
+        this.LValu = new ArrayList<>();
     }
 
     public String getNom(){

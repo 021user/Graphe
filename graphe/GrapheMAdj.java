@@ -33,14 +33,23 @@ public class GrapheMAdj extends Graphe {
             this.NomSommet.add(noeud);
             this.NbSommets+=1;
             int[][] newM = new int [this.NbSommets][this.NbSommets];
-            for(int i = 0; i < this.NbSommets-1;++i){
-                for(int j = 0; j < this.NbSommets-1;++i){
-                    newM[i][j] = this.MVolume[i][j];
-                }
-                newM[i][this.NbSommets] = this.MVolume[i][this.NbSommets];
-            }
             for(int i = 0; i < this.NbSommets;++i){
-                newM[this.NbSommets][i] = this.MVolume[this.NbSommets][i];
+                if(i == this.NbSommets-1)
+                {
+                    for(int j = 0; j < this.NbSommets;++j){
+                        newM[i][j] = 0;
+                    }
+                }
+                else{
+                    for(int j = 0; j < this.NbSommets;++j){
+                        if(j == this.NbSommets-1){
+                            newM[i][j] = 0;
+                        }
+                        else{
+                            newM[i][j] = this.MVolume[i][j];
+                        }
+                    }
+                }
             }
             this.MVolume = newM;
         }
@@ -55,6 +64,8 @@ public class GrapheMAdj extends Graphe {
             this.ajouterSommet(source);
         if(y == -1)
             this.ajouterSommet(destination);
+        x = this.Indice(source);
+        y = this.Indice(destination);
         if(this.MVolume[x][y] != 0)
             throw new IllegalArgumentException("L'arc existe déjà");
         else
@@ -67,14 +78,20 @@ public class GrapheMAdj extends Graphe {
         if(this.contientSommet(noeud)){
             int x = this.Indice(noeud);
             int[][] newM = new int[this.NbSommets-1][this.NbSommets-1];
+            int cpt1 = 0;//Compteur de taille de newM
+            int cpt2 = 0;//Compteur de taille de newM
             for(int i = 0; i < this.NbSommets;++i){
                 if(i != x)
                 {
                     for(int j = 0; j < this.NbSommets;++j){
-                        if(j != x)
-                            newM[i][j] = this.MVolume[i][j];
+                        if(j != x) {
+                            newM[cpt1][cpt2] = this.MVolume[i][j];
+                            cpt2+=1;
+                        }
                     }
+                    cpt1+=1;
                 }
+                cpt2 = 0;
             }
             this.NomSommet.remove(x);
             this.NbSommets-=1;
@@ -97,7 +114,7 @@ public class GrapheMAdj extends Graphe {
         ArrayList<String> Succ = new ArrayList<>();
         int x = this.Indice(sommet);
         for(int i = 0; i < this.NbSommets;++i){
-            if(this.MVolume[x][i] >= 0)
+            if(this.MVolume[x][i] > 0)
             {
                 Succ.add(this.NomSommet.get(i));
             }
