@@ -37,13 +37,13 @@ public class GrapheMAdj extends Graphe {
                 if(i == this.NbSommets-1)
                 {
                     for(int j = 0; j < this.NbSommets;++j){
-                        newM[i][j] = 0;
+                        newM[i][j] = -1;
                     }
                 }
                 else{
                     for(int j = 0; j < this.NbSommets;++j){
                         if(j == this.NbSommets-1){
-                            newM[i][j] = 0;
+                            newM[i][j] = -1;
                         }
                         else{
                             newM[i][j] = this.MVolume[i][j];
@@ -66,7 +66,7 @@ public class GrapheMAdj extends Graphe {
             this.ajouterSommet(destination);
         x = this.Indice(source);
         y = this.Indice(destination);
-        if(this.MVolume[x][y] != 0)
+        if(this.MVolume[x][y] != -1)
             throw new IllegalArgumentException("L'arc existe déjà");
         else
             this.MVolume[x][y] = valeur;
@@ -103,10 +103,10 @@ public class GrapheMAdj extends Graphe {
     public void oterArc(String source, String destination) {
         int x = this.Indice(source);
         int y = this.Indice(destination);
-        if(x == -1 || y == -1 || this.MVolume[x][y] == 0)
-            throw new IllegalArgumentException("L'arc existe déjà");
+        if(x == -1 || y == -1 || this.MVolume[x][y] == -1)
+            throw new IllegalArgumentException("L'arc n'existe pas");
         else
-            this.MVolume[x][y] = 0;
+            this.MVolume[x][y] = -1;
     }
 
     @Override
@@ -151,7 +151,7 @@ public class GrapheMAdj extends Graphe {
     public boolean contientArc(String src, String dest) {
         int x = this.Indice(src);
         int y = this.Indice(dest);
-        if(x == -1 || y == -1 || this.MVolume[x][y] == 0)
+        if(x == -1 || y == -1 || this.MVolume[x][y] == -1)
             return false;
         return true;
     }

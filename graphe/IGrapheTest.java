@@ -23,7 +23,7 @@ class IGrapheTest {
             new GrapheLArcs(), new GrapheLAdj(),
 			new GrapheMAdj()
 	};
-	/*
+
 	
 	// graphe de l'exercice 3.1 du poly de maths
 	// avec en plus un noeud isole : J
@@ -174,5 +174,4 @@ class IGrapheTest {
             System.out.println("Erreur lors de l'acces aux dossiers: " + e.getMessage());
         }
     }
-*/
 }
