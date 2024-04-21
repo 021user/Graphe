@@ -74,7 +74,7 @@ public class GrapheMAdj extends Graphe {
 
 
     @Override
-    public void oterSommet(String noeud) {//A corriger
+    public void oterSommet(String noeud) {
         if(this.contientSommet(noeud)){
             int x = this.Indice(noeud);
             int[][] newM = new int[this.NbSommets-1][this.NbSommets-1];
