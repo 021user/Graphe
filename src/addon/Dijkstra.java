@@ -1,4 +1,4 @@
-package src.addon;
+package addon;
 import java.util.*;
 
 public class Dijkstra {

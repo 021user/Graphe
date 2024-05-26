@@ -1,7 +1,7 @@
-package src.addon;
+package addon;
 
 
-import src.graphe.Arc;
+import graphe.Arc;
 
 import java.io.File;
 import java.io.FileNotFoundException;

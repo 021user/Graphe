@@ -1,11 +1,11 @@
-package src.Test;
+package Test;
 
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import src.addon.Dijkstra;
-import src.addon.GraphImporter;
-import src.addon.IGraphe;
+import addon.Dijkstra;
+import addon.GraphImporter;
+import addon.IGraphe;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -22,10 +22,10 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
-import src.graphe.Arc;
-import src.graphe.GrapheLAdj;
-import src.graphe.GrapheLArcs;
-import src.graphe.GrapheMAdj;
+import graphe.Arc;
+import graphe.GrapheLAdj;
+import graphe.GrapheLArcs;
+import graphe.GrapheMAdj;
 
 class IGrapheTest {
 	private final IGraphe[] graphes = { 

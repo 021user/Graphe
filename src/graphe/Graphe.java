@@ -1,6 +1,7 @@
-package src.graphe;
-import src.addon.IGraphe;
+package graphe;
 
+
+import addon.IGraphe;
 
 public abstract class Graphe implements IGraphe {
 

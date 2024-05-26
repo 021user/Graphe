@@ -1,4 +1,4 @@
-	package src.addon;
+	package addon;
 
 
     // ajouterSommet ne fait rien si un sommet est deja present
