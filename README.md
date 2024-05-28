@@ -14,4 +14,4 @@ Parmi les trois classes de graphes demandées, les trois suivantes ont été cod
 3. GrapheMAdj (Graphe représenté par une matrice d'adjacence)
 
 ## Test de l'algorithme de Dijkstra :
-L'algorithme de Dijkstra a été implémenté dans le projet et testé avec succès avec les graphes fournis sur Moodle pour les classes GrapheLAdj et GrapheLArcs. Cependant, les tests avec Dijkstra pour la classe GrapheMAdj n'ont pas encore été réalisés.
+L'algorithme de Dijkstra a été implémenté dans le projet et testé avec succès avec les graphes fournis sur Moodle pour les classes GrapheLAdj et GrapheLArc et la classe GrapheMAdj.
