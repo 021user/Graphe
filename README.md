@@ -4,7 +4,6 @@
 - Outrebon Séraphin
 - Guesba Iyad
 - Boukhemal Rayane
-- Liu Pascal
 - Ghanemi Abdelhafid
 
 ## Classes de graphes codées :
